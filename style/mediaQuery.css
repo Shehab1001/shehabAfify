@@ -1,0 +1,314 @@
+@media screen and (max-width: 768px) {
+    .container {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+
+    /*======== HOME SECTION =======*/
+    #home {
+        padding-top: 100px;
+        padding-bottom: 20px;
+    }
+
+    .home-name {
+        font-size: 40px;
+    }
+
+    .home-caption {
+        margin-left: 0px;
+        width: 100%;
+        padding-left: 0;
+        margin-top: 60px;
+
+    }
+
+    .home-img {
+        width: 320px;
+        height: 320px;
+    }
+
+    .home-hey {
+        font-size: 22px;
+    }
+
+    .home-content {
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+    }
+
+    .social-icon {
+        flex-direction: row;
+        /* Icons will line up horizontally */
+        width: 100%;
+        margin-top: 35px;
+        margin-bottom: 25px;
+    }
+
+
+
+    .home-caption button {
+        font-size: 16px;
+        padding: 10px;
+        height: 60px;
+
+    }
+
+    .home-caption button i {
+        font-size: 15px;
+    }
+
+    /*======== ABOUT SECTION =======*/
+
+
+    #about {
+        height: 80vh;
+    }
+
+    .about-title {
+        font-size: 35px;
+    }
+
+    .about-caption {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .item {
+        height: 160px;
+    }
+
+    .item i {
+        font-size: 19px;
+    }
+
+    .item .item-title {
+        font-size: 17px;
+    }
+
+    .item .item-value {
+        font-size: 16px;
+    }
+
+    .item-container {
+        gap: 15px;
+    }
+
+    /*======== SERVICES SECTION =======*/
+
+    #services {
+        height: 160vh;
+    }
+
+    #services .row {
+        gap: 20px;
+    }
+
+    /*======== SKILLS SECTION =======*/
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+        /* 4 columns of equal width */
+        padding: 0px;
+    }
+
+    .timeline-items::before {
+        left: 7px;
+    }
+
+    .timeline-item:nth-child(odd) {
+        padding-right: 0;
+        text-align: left;
+    }
+
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        padding-left: 37px;
+    }
+
+    .timeline-dot {
+        left: 0;
+    }
+
+    #contact {
+    height: 180vh;
+    
+}
+
+#contact .cont-btn {
+   width: 100%;
+}
+
+
+
+}
+
+@media screen and (min-width: 769px) and (max-width:992px) {
+  
+    .container {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    /*======== HOME SECTION =======*/
+
+    #home {
+        padding-top: 120px;
+    }
+
+
+    .home-caption {
+        width: 60%;
+        padding-left: 0px;
+    }
+
+
+    .home-img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .home-hey {
+        font-size: 18px;
+    }
+
+    .home-name {
+        font-size: 35px;
+    }
+
+    #bio {
+        font-size: 18px;
+    }
+
+    .home-desc {
+        font-size: 16px;
+        width: 90%;
+    }
+
+    .home-caption button {
+        font-size: 15px;
+        padding: 10px;
+        height: 50px;
+        width: 140px;
+
+    }
+
+    .home-caption button i {
+        font-size: 15px;
+    }
+
+    /*======== About SECTION =======*/
+    #about {
+        height: 85vh;
+    }
+
+    .item {
+        height: 165px;
+    }
+
+    .item-title {
+        font-size: 19px;
+    }
+
+    .about-caption {
+        width: 100%;
+    }
+
+}
+
+@media screen and (min-width: 992px) and (max-width:1200px) {
+
+    .home-caption {
+        width: 60%;
+        padding-left: 60px;
+    }
+
+    .home-img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .home-hey {
+        font-size: 20px;
+    }
+
+    .home-name {
+        font-size: 30px;
+    }
+
+    #bio {
+        font-size: 18px;
+    }
+
+    .home-desc {
+        width: 75%;
+    }
+
+
+}
+
+@media screen and (min-width: 1201px) {
+    .home-desc {
+        width: 75%;
+    }
+}
+
+
+@media screen and (min-width: 1200px) and (max-width:1300px) {
+
+    .home-caption {
+        width: 60%;
+        padding-left: 60px;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+
+    #about {
+        height: 140vh;
+    }
+
+    .item-container {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .about-caption {
+        margin-bottom: 30px;
+        width: 100%;
+    }
+
+    .item i {
+        font-size: 22px;
+    }
+
+
+
+}
+
+@media screen and (max-width: 420px){
+    .tab-nav {
+        gap: 15px;
+    }
+
+    .tab-nav .tab-link {
+        margin-right: 0px;
+        padding: 5px;
+       
+    }
+}
+
+@media screen and (min-width: 470px) and (max-width:768px){
+    .project-content img {
+
+        height: 220px;
+  
+    
+    }
+}
+
+@media screen and (min-width: 768px){
+    .contactForm {
+        width: 60%;
+    }
+}
