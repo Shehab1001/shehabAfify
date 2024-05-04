@@ -238,6 +238,13 @@ body {
 .social-icon {
     gap: 20px;
 }
+.social-icon i{
+    color: #232324;
+}
+
+.dark-mode .social-icon i {
+    color: white;
+}
 
 
 /*==========================About SECTION=======================*/
