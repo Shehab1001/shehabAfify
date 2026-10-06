@@ -1430,3 +1430,56 @@ p{margin:0}
     transform:none;
   }
 }
+
+
+/* ===== Equal project card sizing ===== */
+.project-carousel{
+  align-items:stretch;
+}
+.project-carousel .project-card{
+  height:680px;
+  padding:20px;
+}
+.project-carousel .card-visual{
+  height:195px;
+  margin-bottom:20px;
+}
+.project-carousel .project-topline{
+  margin-bottom:18px;
+}
+.project-carousel .project-card h3{
+  min-height:68px;
+  display:flex;
+  align-items:flex-start;
+}
+.project-carousel .project-card p{
+  min-height:90px;
+}
+.project-carousel .project-card .tags{
+  margin:18px 0 14px;
+}
+.project-carousel .project-links{
+  min-height:24px;
+  align-items:center;
+}
+@media (max-width:980px){
+  .project-carousel .project-card{
+    height:650px;
+  }
+}
+@media (max-width:650px){
+  .project-carousel .project-card{
+    height:620px;
+    padding:18px;
+  }
+  .project-carousel .card-visual{
+    height:185px;
+    margin-bottom:18px;
+  }
+  .project-carousel .project-card h3{
+    min-height:auto;
+  }
+  .project-carousel .project-card p{
+    min-height:auto;
+  }
+}
