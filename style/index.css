@@ -1381,3 +1381,19 @@ p{margin:0}
     margin-bottom:40px;
   }
 }
+
+
+/* ===== Lift selected work section ===== */
+#work{
+  padding-top:28px;
+}
+@media (max-width:980px){
+  #work{
+    padding-top:34px;
+  }
+}
+@media (max-width:650px){
+  #work{
+    padding-top:38px;
+  }
+}
