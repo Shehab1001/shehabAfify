@@ -1416,3 +1416,14 @@ p{margin:0}
     translate:0 -18px;
   }
 }
+
+
+/* ===== Selected work intro alignment ===== */
+#work .section-heading > p{
+  transform:translateY(-26px);
+}
+@media (max-width:980px){
+  #work .section-heading > p{
+    transform:none;
+  }
+}
