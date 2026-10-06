@@ -1713,3 +1713,44 @@ html[data-theme="light"] #featuredRevnivo::before{
     margin-top:0;
   }
 }
+
+
+/* ===== New creative project cards ===== */
+.creative-project-visual{
+  position:relative;
+  overflow:hidden;
+  background-color:#111316;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
+}
+.kinetic-project-visual{
+  background-image:
+    linear-gradient(180deg,rgba(8,9,10,.04),rgba(8,9,10,.12)),
+    url('/assets/kinetic.png');
+}
+.nexus-project-visual{
+  background-image:
+    linear-gradient(180deg,rgba(8,9,10,.02),rgba(8,9,10,.14)),
+    url('/assets/nexus.png');
+}
+.creative-project-visual::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.055),transparent 65%);
+  transform:translateX(-115%);
+  transition:transform .72s var(--motion-ease);
+}
+.creative-project-card:hover .creative-project-visual::after{
+  transform:translateX(115%);
+}
+.creative-project-card .project-status{
+  white-space:nowrap;
+}
+@media (max-width:650px){
+  .creative-project-card .project-status{
+    font-size:10px;
+  }
+}
