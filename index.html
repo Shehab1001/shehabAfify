@@ -4,7 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Portfolio of Shehab Eldin Saeed — full-stack developer building production-ready web products, dashboards, APIs, and AI-assisted tools." />
-  <meta name="theme-color" content="#0b1020" />
+  <meta name="theme-color" content="#101112" />
+  <script data-theme-bootstrap>
+    (() => {
+      try {
+        const saved = localStorage.getItem('portfolio-theme');
+        const systemLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        document.documentElement.dataset.theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (systemLight ? 'light' : 'dark');
+      } catch (_) {}
+    })();
+  </script>
   <meta property="og:title" content="Shehab Eldin Saeed — Full-Stack Developer" />
   <meta property="og:description" content="Building production-ready web products, dashboards, APIs, and AI-assisted tools." />
   <meta property="og:type" content="website" />
@@ -56,7 +67,7 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="theme-toggle" type="button" aria-label="Switch color theme">
+        <button class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch color theme">
           <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
           <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg>
         </button>
