@@ -1727,12 +1727,12 @@ html[data-theme="light"] #featuredRevnivo::before{
 .kinetic-project-visual{
   background-image:
     linear-gradient(180deg,rgba(8,9,10,.04),rgba(8,9,10,.12)),
-    url('/assets/kinetic.png');
+    url('/assets/kinetic.PNG');
 }
 .nexus-project-visual{
   background-image:
     linear-gradient(180deg,rgba(8,9,10,.02),rgba(8,9,10,.14)),
-    url('/assets/nexus.png');
+    url('/assets/nexus.PNG');
 }
 .creative-project-visual::after{
   content:"";
