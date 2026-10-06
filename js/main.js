@@ -5,6 +5,8 @@
   const nav = document.querySelector('.nav-links');
   const navLinks = [...document.querySelectorAll('.nav-links a')];
   const themeButton = document.querySelector('.theme-toggle');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 
   const storedTheme = localStorage.getItem('portfolio-theme');
   if (storedTheme === 'light' || storedTheme === 'dark') {
@@ -34,12 +36,6 @@
 
   navLinks.forEach(link => link.addEventListener('click', closeMenu));
 
-  const onScroll = () => {
-    header?.classList.toggle('scrolled', window.scrollY > 24);
-  };
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -47,62 +43,77 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
   document.querySelectorAll('.project-card, .stack-card, .branch-item').forEach((el, index) => {
-    el.style.transitionDelay = `${(index % 4) * 90}ms`;
+    el.style.transitionDelay = `${(index % 4) * 70}ms`;
   });
-
 
   const projectCarousel = document.getElementById('projectCarousel');
   const projectPrev = document.querySelector('.carousel-prev');
   const projectNext = document.querySelector('.carousel-next');
   const projectPosition = document.getElementById('projectPosition');
+  let carouselCards = [];
+
+  const stepSize = () => {
+    const first = carouselCards[0];
+    if (!first || !projectCarousel) return projectCarousel?.clientWidth || 0;
+    const gap = parseFloat(getComputedStyle(projectCarousel).gap) || 0;
+    return first.getBoundingClientRect().width + gap;
+  };
+
+  const updateCarouselDepth = () => {
+    if (!projectCarousel || reducedMotion) return;
+    const viewport = projectCarousel.getBoundingClientRect();
+    const viewportCenter = viewport.left + viewport.width / 2;
+    const maxDistance = Math.max(viewport.width * .58, 1);
+
+    carouselCards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.left + rect.width / 2;
+      const distance = Math.abs(cardCenter - viewportCenter);
+      const focus = 1 - clamp(distance / maxDistance);
+      card.style.setProperty('--carousel-focus', focus.toFixed(3));
+    });
+  };
+
+  const updateProjectControls = () => {
+    if (!projectCarousel || !projectPrev || !projectNext) return;
+    const maxScroll = projectCarousel.scrollWidth - projectCarousel.clientWidth;
+    projectPrev.disabled = projectCarousel.scrollLeft <= 4;
+    projectNext.disabled = projectCarousel.scrollLeft >= maxScroll - 4;
+
+    if (projectPosition) {
+      const index = Math.round(projectCarousel.scrollLeft / Math.max(stepSize(), 1));
+      projectPosition.textContent = String(Math.min(carouselCards.length, index + 1));
+    }
+    updateCarouselDepth();
+  };
 
   if (projectCarousel && projectPrev && projectNext) {
-    const cards = [...projectCarousel.querySelectorAll('.project-card')];
-
-    const stepSize = () => {
-      const first = cards[0];
-      if (!first) return projectCarousel.clientWidth;
-      const gap = parseFloat(getComputedStyle(projectCarousel).gap) || 0;
-      return first.getBoundingClientRect().width + gap;
-    };
-
-    const updateProjectControls = () => {
-      const maxScroll = projectCarousel.scrollWidth - projectCarousel.clientWidth;
-      projectPrev.disabled = projectCarousel.scrollLeft <= 4;
-      projectNext.disabled = projectCarousel.scrollLeft >= maxScroll - 4;
-
-      if (projectPosition) {
-        const index = Math.round(projectCarousel.scrollLeft / Math.max(stepSize(), 1));
-        projectPosition.textContent = String(Math.min(cards.length, index + 1));
-      }
-    };
+    carouselCards = [...projectCarousel.querySelectorAll('.project-card')];
 
     projectPrev.addEventListener('click', () => {
-      projectCarousel.scrollBy({ left: -stepSize(), behavior: 'smooth' });
+      projectCarousel.scrollBy({ left: -stepSize(), behavior: reducedMotion ? 'auto' : 'smooth' });
     });
-
     projectNext.addEventListener('click', () => {
-      projectCarousel.scrollBy({ left: stepSize(), behavior: 'smooth' });
+      projectCarousel.scrollBy({ left: stepSize(), behavior: reducedMotion ? 'auto' : 'smooth' });
     });
 
     projectCarousel.addEventListener('keydown', event => {
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
-        projectCarousel.scrollBy({ left: -stepSize(), behavior: 'smooth' });
+        projectCarousel.scrollBy({ left: -stepSize(), behavior: reducedMotion ? 'auto' : 'smooth' });
       }
       if (event.key === 'ArrowRight') {
         event.preventDefault();
-        projectCarousel.scrollBy({ left: stepSize(), behavior: 'smooth' });
+        projectCarousel.scrollBy({ left: stepSize(), behavior: reducedMotion ? 'auto' : 'smooth' });
       }
     });
 
     projectCarousel.addEventListener('scroll', updateProjectControls, { passive: true });
-    window.addEventListener('resize', updateProjectControls);
     updateProjectControls();
   }
 
@@ -115,13 +126,77 @@
       });
     });
   }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
-
   sections.forEach(section => activeObserver.observe(section));
+
+  const hero = document.querySelector('.hero');
+  const heroVisual = document.querySelector('[data-scroll-parallax]');
+  const featuredProject = document.querySelector('.featured-project');
+  const featuredMedia = document.querySelector('[data-scroll-media]');
+  const branchTimeline = document.querySelector('.branch-timeline');
+  const ambientOne = document.querySelector('.ambient-one');
+  const ambientTwo = document.querySelector('.ambient-two');
+  let ticking = false;
+
+  const updateMotion = () => {
+    ticking = false;
+    const scrollY = window.scrollY;
+    const maxPageScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+    root.style.setProperty('--page-progress', (scrollY / maxPageScroll).toFixed(4));
+    header?.classList.toggle('scrolled', scrollY > 24);
+
+    if (!reducedMotion) {
+      if (hero && heroVisual) {
+        const heroRect = hero.getBoundingClientRect();
+        const heroTravel = clamp(-heroRect.top / Math.max(hero.offsetHeight, 1), 0, 1);
+        heroVisual.style.setProperty('--hero-parallax', `${(heroTravel * 54).toFixed(1)}px`);
+        heroVisual.style.setProperty('--hero-scale', (1 - heroTravel * .035).toFixed(4));
+      }
+
+      if (featuredProject && featuredMedia) {
+        const rect = featuredProject.getBoundingClientRect();
+        const progress = clamp((window.innerHeight - rect.top) / (window.innerHeight + rect.height));
+        const centred = (progress - .5) * 2;
+        featuredMedia.style.setProperty('--media-y', `${(-centred * 16).toFixed(1)}px`);
+        featuredMedia.style.setProperty('--media-rotate', `${(centred * .7).toFixed(2)}deg`);
+        featuredMedia.style.setProperty('--media-scale', (0.982 + progress * .018).toFixed(4));
+      }
+
+      if (branchTimeline) {
+        const rect = branchTimeline.getBoundingClientRect();
+        const progress = clamp((window.innerHeight * .7 - rect.top) / Math.max(rect.height, 1));
+        branchTimeline.style.setProperty('--timeline-progress', progress.toFixed(4));
+      }
+
+      if (ambientOne) ambientOne.style.setProperty('--ambient-y', `${(scrollY * .035).toFixed(1)}px`);
+      if (ambientTwo) ambientTwo.style.setProperty('--ambient-y', `${(-scrollY * .022).toFixed(1)}px`);
+
+      updateCarouselDepth();
+    } else if (branchTimeline) {
+      branchTimeline.style.setProperty('--timeline-progress', '1');
+    }
+  };
+
+  const requestMotionFrame = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateMotion);
+  };
+
+  window.addEventListener('scroll', requestMotionFrame, { passive: true });
+  window.addEventListener('resize', () => {
+    updateProjectControls();
+    requestMotionFrame();
+  });
 
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') closeMenu();
+  });
+
+  requestAnimationFrame(() => {
+    document.body.classList.add('motion-ready');
+    updateMotion();
   });
 })();
