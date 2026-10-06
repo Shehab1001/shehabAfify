@@ -192,3 +192,163 @@ body{background:
 @media (max-width:650px){
   .profile-shell{width:min(82vw,340px)}
 }
+
+
+/* ===== Experience branch timeline ===== */
+.experience-section{overflow:hidden}
+.branch-timeline{
+  position:relative;
+  display:grid;
+  gap:26px;
+  padding:18px 0 8px;
+}
+.branch-timeline::before{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:2px;
+  transform:translateX(-50%);
+  background:linear-gradient(180deg,transparent,rgba(255,255,255,.18) 6%,rgba(255,255,255,.13) 94%,transparent);
+}
+.branch-item{
+  position:relative;
+  width:50%;
+  padding:0 54px;
+}
+.branch-left{justify-self:start;text-align:right}
+.branch-right{justify-self:end;text-align:left}
+.branch-node{
+  position:absolute;
+  top:30px;
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  z-index:3;
+  color:#e5e5e2;
+  background:#17191b;
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 0 0 8px #111315,0 10px 28px rgba(0,0,0,.30);
+  font-size:14px;
+}
+.branch-left .branch-node{right:-21px}
+.branch-right .branch-node{left:-21px}
+.branch-item::after{
+  content:"";
+  position:absolute;
+  top:50px;
+  width:34px;
+  height:1px;
+  background:rgba(255,255,255,.18);
+}
+.branch-left::after{right:20px}
+.branch-right::after{left:20px}
+.branch-card{
+  position:relative;
+  padding:24px 26px 22px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.075);
+  background:linear-gradient(145deg,rgba(31,33,36,.96),rgba(22,24,26,.98));
+  box-shadow:0 18px 48px rgba(0,0,0,.22);
+  transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease;
+}
+.branch-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(255,255,255,.16);
+  box-shadow:0 25px 65px rgba(0,0,0,.31);
+}
+.branch-meta{
+  display:flex;
+  gap:10px 14px;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  margin-bottom:13px;
+}
+.branch-left .branch-meta{flex-direction:row-reverse}
+.branch-date{
+  color:#d1d2d3;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.045em;
+  text-transform:uppercase;
+}
+.branch-mode{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+  padding:5px 9px;
+  border:1px solid rgba(255,255,255,.075);
+  background:rgba(255,255,255,.035);
+  border-radius:999px;
+}
+.branch-card h3{
+  margin:0;
+  color:var(--text);
+  font-family:"Cairo",sans-serif;
+  font-size:clamp(21px,2.15vw,27px);
+  line-height:1.4;
+  letter-spacing:-.02em;
+}
+.branch-company{
+  margin:2px 0 14px;
+  color:#a6a8ab;
+  font-weight:700;
+  font-size:15px;
+}
+.branch-card ul{
+  margin:0;
+  padding-left:19px;
+  color:var(--muted);
+}
+.branch-left .branch-card ul{
+  direction:ltr;
+  text-align:left;
+}
+.branch-card li{
+  padding-left:3px;
+  margin-bottom:8px;
+  font-size:13.5px;
+  line-height:1.72;
+}
+.branch-card li:last-child{margin-bottom:0}
+.branch-card li::marker{color:#d2d3d4}
+@media (max-width:980px){
+  .branch-timeline{gap:20px;padding-left:18px}
+  .branch-timeline::before{left:20px;transform:none}
+  .branch-item,.branch-left,.branch-right{
+    width:100%;
+    justify-self:stretch;
+    padding:0 0 0 62px;
+    text-align:left;
+  }
+  .branch-left .branch-node,.branch-right .branch-node{
+    left:0;
+    right:auto;
+  }
+  .branch-left::after,.branch-right::after{
+    left:34px;
+    right:auto;
+    width:28px;
+  }
+  .branch-left .branch-meta{flex-direction:row}
+  .branch-left .branch-card ul{direction:ltr;text-align:left}
+}
+@media (max-width:650px){
+  .branch-timeline{padding-left:8px}
+  .branch-timeline::before{left:13px}
+  .branch-item,.branch-left,.branch-right{padding-left:48px}
+  .branch-node{width:28px;height:28px;top:26px;font-size:10px}
+  .branch-left .branch-node,.branch-right .branch-node{left:0}
+  .branch-left::after,.branch-right::after{left:27px;width:21px;top:40px}
+  .branch-card{padding:20px 18px;border-radius:18px}
+  .branch-meta{display:grid;justify-content:start;gap:7px}
+  .branch-date{font-size:11px}
+  .branch-mode{width:max-content}
+  .branch-card h3{font-size:21px}
+  .branch-company{font-size:14px}
+  .branch-card li{font-size:13px}
+}
