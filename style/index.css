@@ -1378,7 +1378,10 @@ p{margin:0}
 }
 @media (max-width:650px){
   #work .section-heading{
-    margin-bottom:40px;
+    margin-bottom:64px;
+  }
+  #work .section-heading > p{
+    padding-bottom:4px;
   }
 }
 
