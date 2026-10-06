@@ -23,7 +23,7 @@ button{font:inherit}
 .site-header{height:var(--header);position:fixed;inset:0 0 auto;z-index:50;border-bottom:1px solid transparent;transition:.25s ease}
 .site-header.scrolled{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(18px);border-color:var(--line)}
 .nav-wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:26px}
-.brand{display:flex;align-items:center;gap:10px;font-family:"Cairo",sans-serif;font-weight:800;font-size:19px;letter-spacing:-.2px}
+.brand{display:flex;align-items:center;font-family:"Cairo",sans-serif;font-weight:500;font-size:20px;letter-spacing:-.35px}
 .brand-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:linear-gradient(145deg,#e4e4df,#8e9196);color:#171819;box-shadow:0 12px 28px rgba(0,0,0,.22)}
 .nav-links{display:flex;align-items:center;gap:26px;color:var(--muted);font-weight:600;font-size:14px}
 .nav-links a{position:relative;transition:.2s ease}
@@ -744,4 +744,23 @@ body{
   .revnivo-screenshot,.hero-visual{transform:none!important}
   .project-carousel .project-card{opacity:1!important;filter:none!important;transform:none!important}
   .branch-timeline::after{transform:translateX(-50%) scaleY(1)!important}
+}
+
+/* ===== Wordmark refinement ===== */
+.brand-wordmark{
+  font-weight:400;
+  font-size:21px;
+  line-height:1;
+  letter-spacing:-.45px;
+  color:var(--text);
+  transition:opacity .2s ease,transform .25s var(--motion-ease);
+}
+.brand-wordmark:hover{
+  opacity:.74;
+  transform:translateY(-1px);
+}
+.brand-mark{display:none!important}
+@media (max-width:650px){
+  .brand-wordmark{font-size:19px}
+  .brand span:last-child{display:inline}
 }
