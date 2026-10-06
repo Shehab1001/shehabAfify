@@ -55,6 +55,57 @@
     el.style.transitionDelay = `${(index % 4) * 90}ms`;
   });
 
+
+  const projectCarousel = document.getElementById('projectCarousel');
+  const projectPrev = document.querySelector('.carousel-prev');
+  const projectNext = document.querySelector('.carousel-next');
+  const projectPosition = document.getElementById('projectPosition');
+
+  if (projectCarousel && projectPrev && projectNext) {
+    const cards = [...projectCarousel.querySelectorAll('.project-card')];
+
+    const stepSize = () => {
+      const first = cards[0];
+      if (!first) return projectCarousel.clientWidth;
+      const gap = parseFloat(getComputedStyle(projectCarousel).gap) || 0;
+      return first.getBoundingClientRect().width + gap;
+    };
+
+    const updateProjectControls = () => {
+      const maxScroll = projectCarousel.scrollWidth - projectCarousel.clientWidth;
+      projectPrev.disabled = projectCarousel.scrollLeft <= 4;
+      projectNext.disabled = projectCarousel.scrollLeft >= maxScroll - 4;
+
+      if (projectPosition) {
+        const index = Math.round(projectCarousel.scrollLeft / Math.max(stepSize(), 1));
+        projectPosition.textContent = String(Math.min(cards.length, index + 1));
+      }
+    };
+
+    projectPrev.addEventListener('click', () => {
+      projectCarousel.scrollBy({ left: -stepSize(), behavior: 'smooth' });
+    });
+
+    projectNext.addEventListener('click', () => {
+      projectCarousel.scrollBy({ left: stepSize(), behavior: 'smooth' });
+    });
+
+    projectCarousel.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        projectCarousel.scrollBy({ left: -stepSize(), behavior: 'smooth' });
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        projectCarousel.scrollBy({ left: stepSize(), behavior: 'smooth' });
+      }
+    });
+
+    projectCarousel.addEventListener('scroll', updateProjectControls, { passive: true });
+    window.addEventListener('resize', updateProjectControls);
+    updateProjectControls();
+  }
+
   const sections = [...document.querySelectorAll('main section[id]')];
   const activeObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
