@@ -15,11 +15,52 @@
     root.dataset.theme = 'light';
   }
 
-  themeButton?.addEventListener('click', () => {
-    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  const syncThemeUi = () => {
+    const isLight = root.dataset.theme === 'light';
+    themeButton?.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+    if (themeMeta) themeMeta.setAttribute('content', isLight ? '#f1f0ec' : '#101112');
+  };
+
+  const commitTheme = next => {
     root.dataset.theme = next;
     localStorage.setItem('portfolio-theme', next);
+    syncThemeUi();
+  };
+
+  themeButton?.addEventListener('click', event => {
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    const rect = themeButton.getBoundingClientRect();
+    const x = event.clientX || rect.left + rect.width / 2;
+    const y = event.clientY || rect.top + rect.height / 2;
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    root.style.setProperty('--theme-x', `${x}px`);
+    root.style.setProperty('--theme-y', `${y}px`);
+    root.style.setProperty('--theme-radius', `${radius}px`);
+
+    themeButton.classList.remove('theme-pulse');
+    void themeButton.offsetWidth;
+    themeButton.classList.add('theme-pulse');
+
+    if (!reducedMotion && document.startViewTransition) {
+      const transition = document.startViewTransition(() => commitTheme(next));
+      transition.finished.finally(() => themeButton.classList.remove('theme-pulse'));
+    } else {
+      root.classList.add('theme-fallback');
+      commitTheme(next);
+      window.setTimeout(() => {
+        root.classList.remove('theme-fallback');
+        themeButton.classList.remove('theme-pulse');
+      }, reducedMotion ? 0 : 460);
+    }
   });
+
+  syncThemeUi();
 
   const closeMenu = () => {
     nav?.classList.remove('open');
