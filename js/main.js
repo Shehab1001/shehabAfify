@@ -51,6 +51,10 @@
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+  document.querySelectorAll('.project-card, .stack-card, .timeline article').forEach((el, index) => {
+    el.style.transitionDelay = `${(index % 4) * 90}ms`;
+  });
+
   const sections = [...document.querySelectorAll('main section[id]')];
   const activeObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
