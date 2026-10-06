@@ -1397,3 +1397,22 @@ p{margin:0}
     padding-top:38px;
   }
 }
+
+
+/* ===== Lift entire hero composition ===== */
+#home > .container,
+#home > .scroll-cue{
+  translate:0 -46px;
+}
+@media (max-width:980px){
+  #home > .container,
+  #home > .scroll-cue{
+    translate:0 -30px;
+  }
+}
+@media (max-width:650px){
+  #home > .container,
+  #home > .scroll-cue{
+    translate:0 -18px;
+  }
+}
