@@ -270,6 +270,43 @@
   const branchTimeline = document.querySelector('.branch-timeline');
   const ambientOne = document.querySelector('.ambient-one');
   const ambientTwo = document.querySelector('.ambient-two');
+  const featuredRevnivo = document.getElementById('featuredRevnivo');
+  let tiltFrame = null;
+
+  const resetFeaturedTilt = () => {
+    if (!featuredRevnivo) return;
+    if (tiltFrame) cancelAnimationFrame(tiltFrame);
+    featuredRevnivo.classList.remove('is-tilting');
+    featuredRevnivo.style.transform = '';
+    featuredRevnivo.style.removeProperty('--tilt-x');
+    featuredRevnivo.style.removeProperty('--tilt-y');
+  };
+
+  if (featuredRevnivo && !reducedMotion) {
+    featuredRevnivo.addEventListener('pointermove', event => {
+      if (window.innerWidth <= 980 || event.pointerType === 'touch') return;
+
+      const rect = featuredRevnivo.getBoundingClientRect();
+      const px = clamp((event.clientX - rect.left) / rect.width);
+      const py = clamp((event.clientY - rect.top) / rect.height);
+      const rotateY = (px - .5) * 9;
+      const rotateX = (.5 - py) * 7;
+
+      featuredRevnivo.classList.add('is-tilting');
+      featuredRevnivo.style.setProperty('--tilt-x', `${(px * 100).toFixed(2)}%`);
+      featuredRevnivo.style.setProperty('--tilt-y', `${(py * 100).toFixed(2)}%`);
+
+      if (tiltFrame) cancelAnimationFrame(tiltFrame);
+      tiltFrame = requestAnimationFrame(() => {
+        featuredRevnivo.style.transform =
+          `perspective(1200px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px) scale(1.006)`;
+      });
+    });
+
+    featuredRevnivo.addEventListener('pointerleave', resetFeaturedTilt);
+    featuredRevnivo.addEventListener('pointercancel', resetFeaturedTilt);
+  }
+
   let ticking = false;
 
   const updateMotion = () => {
