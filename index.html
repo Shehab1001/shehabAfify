@@ -32,6 +32,10 @@
   </script>
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <div class="page-wash" aria-hidden="true">
+    <div class="page-wash-mark"><span>S.</span><small>Product × Engineering</small></div>
+  </div>
   <div class="ambient ambient-one"></div>
   <div class="ambient ambient-two"></div>
 
@@ -69,7 +73,10 @@
       <div class="container hero-grid">
         <div class="hero-copy reveal">
           <div class="eyebrow"><span class="status-dot"></span> Full-Stack Developer · Alexandria, Egypt</div>
-          <h1>I build digital products that feel <span>fast, useful, and finished.</span></h1>
+          <h1 class="hero-title">
+            <span class="hero-line">I build digital products that feel</span>
+            <span class="hero-line hero-line-accent">fast, useful, and finished.</span>
+          </h1>
           <p class="hero-lead">
             I design and ship full-stack web products — from polished React interfaces to secure APIs, data workflows, dashboards, and career-focused tools.
           </p>
@@ -89,7 +96,7 @@
           </div>
         </div>
 
-        <div class="hero-visual reveal">
+        <div class="hero-visual reveal" data-scroll-parallax>
           <div class="profile-shell">
             <div class="profile-glow"></div>
             <img src="/assets/profile-2026.png" alt="Shehab Eldin Saeed" class="profile-photo" />
@@ -116,6 +123,11 @@
         <div><strong>UI + Data</strong><span>Dashboards & workflows</span></div>
         <div><strong>AI-ready</strong><span>Automation & scoring tools</span></div>
       </div>
+
+      <a class="scroll-cue" href="#work" aria-label="Scroll to selected work">
+        <span>Scroll to explore</span>
+        <i class="fa-solid fa-arrow-down-long"></i>
+      </a>
     </section>
 
     <section class="section" id="work">
@@ -151,7 +163,7 @@
             </div>
           </div>
 
-          <a class="product-mockup revnivo-screenshot" href="https://revnivo.vercel.app" target="_blank" rel="noreferrer" aria-label="Open Revnivo live product">
+          <a class="product-mockup revnivo-screenshot" data-scroll-media href="https://revnivo.vercel.app" target="_blank" rel="noreferrer" aria-label="Open Revnivo live product">
             <img src="assets/revnivo-dashboard.PNG" alt="Revnivo homepage and income dashboard interface" loading="lazy" />
             <span class="screenshot-badge"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live product</span>
           </a>
