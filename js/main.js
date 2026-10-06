@@ -229,6 +229,17 @@
     requestMotionFrame();
   });
 
+  const backToTop = document.getElementById('backToTop');
+  backToTop?.addEventListener('click', event => {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: reducedMotion ? 'auto' : 'smooth'
+    });
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  });
+
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
