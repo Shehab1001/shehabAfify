@@ -352,3 +352,67 @@ body{background:
   .branch-company{font-size:14px}
   .branch-card li{font-size:13px}
 }
+
+
+/* ===== Revnivo real product screenshot ===== */
+.revnivo-screenshot{
+  position:relative;
+  display:block;
+  align-self:center;
+  min-width:0;
+  overflow:hidden;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.10);
+  background:#f3f4f7;
+  box-shadow:0 28px 70px rgba(0,0,0,.30);
+  transform:translateZ(0);
+}
+.revnivo-screenshot img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:1400/648;
+  object-fit:cover;
+  object-position:center;
+  transition:transform .45s cubic-bezier(.2,.7,.2,1),filter .35s ease;
+}
+.revnivo-screenshot::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.12));
+  opacity:.45;
+  transition:opacity .3s ease;
+}
+.revnivo-screenshot:hover img{
+  transform:scale(1.018);
+  filter:brightness(1.02);
+}
+.revnivo-screenshot:hover::after{opacity:.18}
+.screenshot-badge{
+  position:absolute;
+  right:14px;
+  bottom:14px;
+  z-index:2;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:8px 11px;
+  border-radius:999px;
+  background:rgba(18,20,22,.82);
+  color:#f5f5f2;
+  border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(12px);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.025em;
+  box-shadow:0 10px 26px rgba(0,0,0,.24);
+}
+@media (max-width:980px){
+  .revnivo-screenshot{margin-top:4px}
+}
+@media (max-width:650px){
+  .revnivo-screenshot{border-radius:16px}
+  .screenshot-badge{right:10px;bottom:10px;padding:7px 9px;font-size:10px}
+}
