@@ -136,6 +136,100 @@
   if (projectCarousel && projectPrev && projectNext) {
     carouselCards = [...projectCarousel.querySelectorAll('.project-card')];
 
+    let carouselDragging = false;
+    let dragPointerId = null;
+    let dragStartX = 0;
+    let dragStartScrollLeft = 0;
+    let dragMoved = false;
+    let dragVelocity = 0;
+    let lastDragX = 0;
+    let lastDragTime = 0;
+
+    const settleCarousel = () => {
+      const step = Math.max(stepSize(), 1);
+      const projected = projectCarousel.scrollLeft + dragVelocity * 120;
+      const targetIndex = Math.round(projected / step);
+      const maxIndex = Math.max(0, carouselCards.length - 1);
+      const clampedIndex = Math.min(maxIndex, Math.max(0, targetIndex));
+
+      projectCarousel.classList.remove('is-dragging');
+      projectCarousel.classList.add('is-settling');
+      projectCarousel.scrollTo({
+        left: clampedIndex * step,
+        behavior: reducedMotion ? 'auto' : 'smooth'
+      });
+
+      window.setTimeout(() => {
+        projectCarousel.classList.remove('is-settling');
+        updateProjectControls();
+      }, reducedMotion ? 0 : 420);
+    };
+
+    projectCarousel.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      if (event.target.closest('a, button')) return;
+
+      carouselDragging = true;
+      dragMoved = false;
+      dragPointerId = event.pointerId;
+      dragStartX = event.clientX;
+      lastDragX = event.clientX;
+      lastDragTime = performance.now();
+      dragStartScrollLeft = projectCarousel.scrollLeft;
+      dragVelocity = 0;
+
+      projectCarousel.classList.add('is-dragging');
+      projectCarousel.setPointerCapture?.(event.pointerId);
+    });
+
+    projectCarousel.addEventListener('pointermove', event => {
+      if (!carouselDragging || event.pointerId !== dragPointerId) return;
+
+      const deltaX = event.clientX - dragStartX;
+      if (Math.abs(deltaX) > 5) dragMoved = true;
+
+      const now = performance.now();
+      const dt = Math.max(now - lastDragTime, 1);
+      dragVelocity = (lastDragX - event.clientX) / dt;
+      lastDragX = event.clientX;
+      lastDragTime = now;
+
+      projectCarousel.scrollLeft = dragStartScrollLeft - deltaX;
+      updateCarouselDepth();
+    });
+
+    const endCarouselDrag = event => {
+      if (!carouselDragging || event.pointerId !== dragPointerId) return;
+
+      carouselDragging = false;
+      projectCarousel.releasePointerCapture?.(event.pointerId);
+      dragPointerId = null;
+
+      if (dragMoved) {
+        projectCarousel.dataset.justDragged = 'true';
+        window.setTimeout(() => delete projectCarousel.dataset.justDragged, 120);
+      }
+
+      settleCarousel();
+    };
+
+    projectCarousel.addEventListener('pointerup', endCarouselDrag);
+    projectCarousel.addEventListener('pointercancel', endCarouselDrag);
+    projectCarousel.addEventListener('lostpointercapture', event => {
+      if (carouselDragging && event.pointerId === dragPointerId) {
+        carouselDragging = false;
+        dragPointerId = null;
+        settleCarousel();
+      }
+    });
+
+    projectCarousel.addEventListener('click', event => {
+      if (projectCarousel.dataset.justDragged === 'true') {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }, true);
+
     projectPrev.addEventListener('click', () => {
       projectCarousel.scrollBy({ left: -stepSize(), behavior: reducedMotion ? 'auto' : 'smooth' });
     });
