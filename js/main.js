@@ -51,7 +51,7 @@
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  document.querySelectorAll('.project-card, .stack-card, .timeline article').forEach((el, index) => {
+  document.querySelectorAll('.project-card, .stack-card, .branch-item').forEach((el, index) => {
     el.style.transitionDelay = `${(index % 4) * 90}ms`;
   });
 
