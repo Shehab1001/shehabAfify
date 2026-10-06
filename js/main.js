@@ -291,9 +291,9 @@
         const rect = featuredProject.getBoundingClientRect();
         const progress = clamp((window.innerHeight - rect.top) / (window.innerHeight + rect.height));
         const centred = (progress - .5) * 2;
-        featuredMedia.style.setProperty('--media-y', `${(-centred * 28).toFixed(1)}px`);
-        featuredMedia.style.setProperty('--media-rotate', `${(centred * 1.15).toFixed(2)}deg`);
-        featuredMedia.style.setProperty('--media-scale', (0.975 + progress * .028).toFixed(4));
+        featuredMedia.style.setProperty('--media-y', `${(-centred * 16).toFixed(1)}px`);
+        featuredMedia.style.setProperty('--media-rotate', `${(centred * .7).toFixed(2)}deg`);
+        featuredMedia.style.setProperty('--media-scale', (0.982 + progress * .018).toFixed(4));
       }
 
       if (branchTimeline) {
