@@ -416,3 +416,74 @@ body{background:
   .revnivo-screenshot{border-radius:16px}
   .screenshot-badge{right:10px;bottom:10px;padding:7px 9px;font-size:10px}
 }
+
+
+/* ===== Projects carousel ===== */
+.projects-carousel-wrap{margin-top:22px}
+.carousel-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:16px;
+}
+.carousel-copy{display:flex;align-items:center;gap:12px;color:var(--muted)}
+.carousel-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.carousel-count{font-size:12px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.025)}
+.carousel-count strong{color:var(--text)}
+.carousel-controls{display:flex;align-items:center;gap:9px}
+.carousel-arrow{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:var(--surface);
+  color:var(--text);
+  cursor:pointer;
+  transition:transform .2s ease,background .2s ease,border-color .2s ease,opacity .2s ease;
+}
+.carousel-arrow:hover:not(:disabled){
+  transform:translateY(-2px);
+  background:#25272a;
+  border-color:rgba(255,255,255,.16);
+}
+.carousel-arrow:disabled{opacity:.28;cursor:not-allowed}
+.project-grid.project-carousel{
+  display:flex;
+  gap:22px;
+  margin-top:0;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+  overscroll-behavior-inline:contain;
+  padding:2px 1px 10px;
+}
+.project-grid.project-carousel::-webkit-scrollbar{display:none}
+.project-carousel .project-card{
+  flex:0 0 calc((100% - 44px)/3);
+  min-width:0;
+  scroll-snap-align:start;
+}
+.archive-visual{background:#14171b}
+.archive-visual img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:top center;
+  transition:transform .35s ease,filter .35s ease;
+}
+.project-card-archive:hover .archive-visual img{transform:scale(1.025);filter:brightness(1.03)}
+.project-card-archive .project-links{margin-top:4px}
+@media (max-width:980px){
+  .project-carousel .project-card{flex-basis:calc((100% - 22px)/2)}
+}
+@media (max-width:650px){
+  .carousel-toolbar{align-items:flex-end}
+  .carousel-arrow{width:40px;height:40px;border-radius:12px}
+  .project-carousel .project-card{flex-basis:100%}
+  .project-grid.project-carousel{gap:14px}
+}
