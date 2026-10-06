@@ -1542,3 +1542,124 @@ p{margin:0}
     margin-bottom:36px;
   }
 }
+
+
+/* ===== Featured project status + motion showcase ===== */
+.featured-project{
+  position:relative;
+  isolation:isolate;
+}
+.featured-status{
+  position:absolute;
+  top:34px;
+  right:34px;
+  z-index:5;
+}
+.featured-project .project-copy{
+  transition:
+    opacity .8s var(--motion-ease),
+    translate .95s var(--motion-ease);
+}
+.featured-project .revnivo-screenshot{
+  transition:
+    opacity .85s var(--motion-ease),
+    translate 1s var(--motion-ease),
+    border-color .3s ease,
+    box-shadow .3s ease;
+}
+.featured-project:not(.visible) .project-copy{
+  opacity:0;
+  translate:-42px 0;
+}
+.featured-project:not(.visible) .revnivo-screenshot{
+  opacity:0;
+  translate:48px 0;
+}
+.featured-project.visible .project-copy,
+.featured-project.visible .revnivo-screenshot{
+  opacity:1;
+  translate:0 0;
+}
+.featured-project .project-points li,
+.featured-project .tags span,
+.featured-project .project-links > *{
+  opacity:0;
+  translate:0 12px;
+  transition:
+    opacity .55s var(--motion-ease),
+    translate .65s var(--motion-ease);
+}
+.featured-project.visible .project-points li,
+.featured-project.visible .tags span,
+.featured-project.visible .project-links > *{
+  opacity:1;
+  translate:0 0;
+}
+.featured-project.visible .project-points li:nth-child(1){transition-delay:.18s}
+.featured-project.visible .project-points li:nth-child(2){transition-delay:.25s}
+.featured-project.visible .project-points li:nth-child(3){transition-delay:.32s}
+.featured-project.visible .project-points li:nth-child(4){transition-delay:.39s}
+.featured-project.visible .tags span:nth-child(1){transition-delay:.43s}
+.featured-project.visible .tags span:nth-child(2){transition-delay:.47s}
+.featured-project.visible .tags span:nth-child(3){transition-delay:.51s}
+.featured-project.visible .tags span:nth-child(4){transition-delay:.55s}
+.featured-project.visible .tags span:nth-child(5){transition-delay:.59s}
+.featured-project.visible .project-links > *{transition-delay:.64s}
+
+/* a restrained moving highlight makes the feature card feel alive */
+.featured-project::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  z-index:0;
+  background:linear-gradient(112deg,transparent 25%,rgba(255,255,255,.045) 48%,transparent 70%);
+  transform:translateX(-115%);
+}
+.featured-project.visible::after{
+  animation:featuredSweep 1.25s var(--motion-ease) .28s both;
+}
+@keyframes featuredSweep{
+  from{transform:translateX(-115%)}
+  to{transform:translateX(115%)}
+}
+.featured-project > *{position:relative;z-index:1}
+.featured-status{z-index:5}
+
+@media (max-width:980px){
+  .featured-status{
+    top:22px;
+    right:22px;
+  }
+  .featured-project{
+    padding-top:72px;
+  }
+}
+@media (max-width:650px){
+  .featured-status{
+    top:18px;
+    right:18px;
+  }
+  .featured-project{
+    padding-top:64px;
+  }
+  .featured-project:not(.visible) .project-copy{
+    translate:-24px 0;
+  }
+  .featured-project:not(.visible) .revnivo-screenshot{
+    translate:24px 0;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .featured-project .project-copy,
+  .featured-project .revnivo-screenshot,
+  .featured-project .project-points li,
+  .featured-project .tags span,
+  .featured-project .project-links > *{
+    opacity:1!important;
+    translate:none!important;
+    transition:none!important;
+  }
+  .featured-project::after{display:none}
+}
