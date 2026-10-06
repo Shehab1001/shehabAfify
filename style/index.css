@@ -1523,3 +1523,234 @@ p{margin:0}
     margin-bottom:44px;
   }
 }
+
+
+/* ===== Experience heading alignment ===== */
+#experience .section-heading{
+  translate:0 -20px;
+  margin-bottom:50px;
+}
+@media (max-width:980px){
+  #experience .section-heading{
+    translate:0 -14px;
+    margin-bottom:44px;
+  }
+}
+@media (max-width:650px){
+  #experience .section-heading{
+    translate:0 -8px;
+    margin-bottom:36px;
+  }
+}
+
+
+/* ===== Revnivo interactive 3D card ===== */
+#featuredRevnivo{
+  position:relative;
+  overflow:visible;
+  transform-style:preserve-3d;
+  perspective:1200px;
+  will-change:transform;
+  transition:
+    transform .28s var(--motion-ease),
+    box-shadow .28s var(--motion-ease),
+    border-color .28s ease;
+}
+#featuredRevnivo:hover{
+  transform:none;
+  box-shadow:0 30px 80px rgba(0,0,0,.34);
+  border-color:rgba(255,255,255,.12);
+}
+#featuredRevnivo .featured-status{
+  position:absolute;
+  top:34px;
+  right:34px;
+  z-index:8;
+  transform:translateZ(48px);
+}
+#featuredRevnivo .project-copy{
+  transform:translateZ(22px);
+  transform-style:preserve-3d;
+}
+#featuredRevnivo .revnivo-screenshot{
+  transform:
+    translate3d(0,var(--media-y),34px)
+    rotate(var(--media-rotate))
+    scale(var(--media-scale));
+  transform-style:preserve-3d;
+}
+#featuredRevnivo::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  z-index:6;
+  opacity:0;
+  background:
+    radial-gradient(
+      circle at var(--tilt-x,50%) var(--tilt-y,50%),
+      rgba(255,255,255,.10),
+      rgba(255,255,255,.035) 18%,
+      transparent 46%
+    );
+  transition:opacity .22s ease;
+}
+#featuredRevnivo.is-tilting::before{opacity:1}
+#featuredRevnivo.is-tilting .featured-status{
+  transform:translateZ(58px) scale(1.02);
+}
+#featuredRevnivo.is-tilting .project-copy{
+  transform:translateZ(30px);
+}
+#featuredRevnivo.is-tilting .revnivo-screenshot{
+  transform:
+    translate3d(0,var(--media-y),48px)
+    rotate(var(--media-rotate))
+    scale(var(--media-scale));
+}
+html[data-theme="light"] #featuredRevnivo:hover{
+  border-color:rgba(24,26,28,.14);
+  box-shadow:0 30px 70px rgba(34,37,40,.14);
+}
+html[data-theme="light"] #featuredRevnivo::before{
+  background:
+    radial-gradient(
+      circle at var(--tilt-x,50%) var(--tilt-y,50%),
+      rgba(20,22,24,.07),
+      rgba(20,22,24,.025) 18%,
+      transparent 46%
+    );
+}
+@media (max-width:980px){
+  #featuredRevnivo{
+    overflow:hidden;
+    transform:none!important;
+  }
+  #featuredRevnivo .featured-status{
+    top:22px;
+    right:22px;
+    transform:none;
+  }
+  #featuredRevnivo .project-copy{
+    transform:none;
+  }
+  #featuredRevnivo .revnivo-screenshot{
+    transform:translate3d(0,var(--media-y),0) rotate(var(--media-rotate)) scale(var(--media-scale));
+  }
+  #featuredRevnivo::before{display:none}
+}
+@media (max-width:650px){
+  #featuredRevnivo .featured-status{
+    top:18px;
+    right:18px;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  #featuredRevnivo,
+  #featuredRevnivo .featured-status,
+  #featuredRevnivo .project-copy,
+  #featuredRevnivo .revnivo-screenshot{
+    transform:none!important;
+    transition:none!important;
+  }
+  #featuredRevnivo::before{display:none!important}
+}
+
+
+/* ===== Hero visual position + mobile-first portrait order ===== */
+/* Desktop: lift the portrait composition without moving the copy. */
+#home .hero-visual{
+  position:relative;
+  top:-36px;
+}
+
+@media (max-width:980px){
+  #home .hero-visual{
+    top:-22px;
+  }
+}
+
+/* Mobile: portrait first, then the hero copy/content. */
+@media (max-width:650px){
+  #home .hero-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+
+  #home .hero-visual{
+    order:1;
+    top:0;
+    min-height:360px;
+    margin:0 0 6px;
+    transform:none !important;
+  }
+
+  #home .hero-copy{
+    order:2;
+  }
+
+  #home .profile-shell{
+    width:min(78vw,320px);
+  }
+
+  #home .card-code{
+    left:-8px;
+    bottom:4px;
+  }
+
+  #home .card-stack{
+    right:-8px;
+    top:12px;
+  }
+
+  #home .hero-copy .eyebrow{
+    margin-top:4px;
+  }
+
+  #home .hero h1{
+    margin-top:0;
+  }
+}
+
+
+/* ===== New creative project cards ===== */
+.creative-project-visual{
+  position:relative;
+  overflow:hidden;
+  background-color:#111316;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
+}
+.kinetic-project-visual{
+  background-image:
+    linear-gradient(180deg,rgba(8,9,10,.04),rgba(8,9,10,.12)),
+    url('/assets/kinetic.png');
+}
+.nexus-project-visual{
+  background-image:
+    linear-gradient(180deg,rgba(8,9,10,.02),rgba(8,9,10,.14)),
+    url('/assets/nexus.png');
+}
+.creative-project-visual::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.055),transparent 65%);
+  transform:translateX(-115%);
+  transition:transform .72s var(--motion-ease);
+}
+.creative-project-card:hover .creative-project-visual::after{
+  transform:translateX(115%);
+}
+.creative-project-card .project-status{
+  white-space:nowrap;
+}
+@media (max-width:650px){
+  .creative-project-card .project-status{
+    font-size:10px;
+  }
+}
