@@ -1069,3 +1069,31 @@ html[data-theme="light"] .carousel-side-arrow{
   .carousel-prev.carousel-side-arrow{left:8px}
   .carousel-next.carousel-side-arrow{right:8px}
 }
+
+
+/* ===== Drag / swipe project carousel ===== */
+.project-carousel{
+  cursor:grab;
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:pan-y pinch-zoom;
+  scroll-snap-stop:always;
+}
+.project-carousel.is-dragging{
+  cursor:grabbing;
+  scroll-snap-type:none;
+  scroll-behavior:auto;
+}
+.project-carousel.is-dragging .project-card{
+  pointer-events:none;
+}
+.project-carousel img{
+  -webkit-user-drag:none;
+  user-drag:none;
+}
+.project-carousel.is-settling{
+  scroll-snap-type:x mandatory;
+}
+@media (hover:none){
+  .project-carousel{cursor:auto}
+}
