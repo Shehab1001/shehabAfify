@@ -183,11 +183,15 @@
               <span class="carousel-label">Project archive</span>
               <span class="carousel-count"><strong id="projectPosition">1</strong> / 20</span>
             </div>
-            <div class="carousel-controls" aria-label="Project carousel controls">
-              <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous projects"><i class="fa-solid fa-arrow-left"></i></button>
-              <button class="carousel-arrow carousel-next" type="button" aria-label="Next projects"><i class="fa-solid fa-arrow-right"></i></button>
-            </div>
           </div>
+
+          <button class="carousel-arrow carousel-prev carousel-side-arrow" type="button" aria-label="Previous projects">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <button class="carousel-arrow carousel-next carousel-side-arrow" type="button" aria-label="Next projects">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
           <div class="project-grid project-carousel" id="projectCarousel" tabindex="0" aria-label="Projects carousel">
           <article class="project-card reveal">
             <div class="card-visual reset-visual"><div class="reset-ring"><span>90</span><small>days</small></div><div class="reset-lines"><i></i><i></i><i></i></div></div>
@@ -531,7 +535,7 @@
   <footer>
     <div class="container footer-wrap">
       <span>© <span id="year"></span> Shehab Eldin Saeed</span>
-      <a href="#top">Back to top ↑</a>
+      <a href="#home" id="backToTop">Back to top ↑</a>
     </div>
   </footer>
 
