@@ -1097,3 +1097,164 @@ html[data-theme="light"] .carousel-side-arrow{
 @media (hover:none){
   .project-carousel{cursor:auto}
 }
+
+
+/* ===== Editorial typography system ===== */
+body{
+  font-weight:400;
+  letter-spacing:0;
+}
+
+/* Navigation: quiet, precise, not visually competing with the work */
+.nav-links{
+  font-weight:500;
+  letter-spacing:-.01em;
+}
+.brand-wordmark{
+  font-weight:400;
+}
+.btn{
+  font-weight:600;
+  letter-spacing:-.01em;
+}
+
+/* Small labels: enough authority without shouting */
+.eyebrow,
+.section-kicker,
+.tiny-label,
+.carousel-label,
+.branch-date,
+.branch-mode,
+.project-status,
+.project-number{
+  font-weight:600;
+}
+.eyebrow,
+.section-kicker{
+  letter-spacing:.045em;
+}
+.tiny-label,
+.carousel-label,
+.branch-date{
+  letter-spacing:.06em;
+}
+.project-status{
+  letter-spacing:.065em;
+}
+
+/* Hero: strong editorial display, less blocky than Extra Bold */
+.hero h1,
+.hero-title{
+  font-weight:700;
+  line-height:1.12;
+  letter-spacing:-.035em;
+}
+.hero-title .hero-line{
+  font-weight:700;
+}
+.hero-title .hero-line-accent{
+  font-weight:600;
+}
+.hero-lead{
+  font-weight:400;
+  letter-spacing:-.012em;
+}
+.hero-meta{
+  font-weight:400;
+}
+.hero-meta a{
+  font-weight:600;
+}
+
+/* Headings: clear hierarchy with less SaaS-template heaviness */
+.section-heading h2,
+.contact-card h2{
+  font-weight:700;
+  letter-spacing:-.03em;
+  line-height:1.16;
+}
+.project-copy h3{
+  font-weight:700;
+  letter-spacing:-.028em;
+}
+.project-card h3,
+.stack-card h3,
+.branch-card h3,
+.timeline h3{
+  font-weight:600;
+  letter-spacing:-.022em;
+}
+.floating-card strong,
+.stats-strip strong,
+.about-callout strong{
+  font-weight:600;
+}
+
+/* Body copy: relaxed and readable */
+.section-heading>p,
+.project-intro,
+.project-points li,
+.project-card p,
+.about-copy,
+.stack-card p,
+.branch-card li,
+.contact-card p,
+.timeline p,
+.floating-card small{
+  font-weight:400;
+}
+.project-intro,
+.about-copy,
+.contact-card p{
+  letter-spacing:-.008em;
+}
+
+/* Supporting UI text */
+.tags span,
+.skill-cloud span,
+.mini-tags span,
+.contact-links,
+.text-link,
+.carousel-count,
+.screenshot-badge{
+  font-weight:500;
+}
+.text-link,
+.contact-links{
+  font-weight:600;
+}
+.stack-card>span,
+.about-callout span,
+.timeline span{
+  font-weight:600;
+}
+.branch-company{
+  font-weight:500;
+}
+
+/* Keep the loader expressive, but not over-bold */
+.page-wash-mark span{
+  font-weight:700;
+}
+.page-wash-mark small,
+.scroll-cue{
+  font-weight:600;
+}
+
+/* Mobile keeps hierarchy without feeling heavy */
+@media (max-width:650px){
+  .hero h1,
+  .hero-title{
+    font-weight:700;
+    line-height:1.13;
+  }
+  .section-heading h2,
+  .contact-card h2{
+    font-weight:700;
+  }
+  .project-card h3,
+  .stack-card h3,
+  .branch-card h3{
+    font-weight:600;
+  }
+}
