@@ -1258,3 +1258,110 @@ body{
     font-weight:600;
   }
 }
+
+
+/* ===== Paragraph rhythm & spacing system ===== */
+/* Remove browser-default paragraph margins; components own their spacing. */
+p{margin:0}
+
+/* Hero */
+.hero-lead{
+  margin:22px 0 0;
+}
+
+/* Section introductions */
+.section-heading>p{
+  margin:0 0 2px;
+}
+@media (max-width:980px){
+  .section-heading>p{
+    margin:16px 0 0;
+  }
+}
+
+/* Featured project */
+.project-intro{
+  margin:16px 0 0;
+}
+.project-points{
+  margin:22px 0 0;
+}
+.project-copy .tags{
+  margin:20px 0 18px;
+}
+
+/* Project cards: consistent title → description → tags rhythm */
+.project-card h3{
+  margin:0;
+}
+.project-card h3 + p{
+  margin-top:14px;
+}
+.project-card p{
+  margin-bottom:0;
+}
+.project-card .tags{
+  margin:20px 0 16px;
+}
+.project-card .project-links{
+  margin-top:0;
+}
+
+/* About */
+.about-copy p{
+  margin:0;
+}
+.about-copy p + p{
+  margin-top:18px;
+}
+.about-callout{
+  margin-top:30px;
+}
+
+/* Stack */
+.stack-card h3{
+  margin-top:8px;
+}
+.stack-card p{
+  margin:12px 0 0;
+}
+
+/* Experience */
+.branch-company{
+  margin:4px 0 14px;
+}
+.timeline p{
+  margin:0;
+}
+
+/* Contact */
+.contact-card p{
+  margin:18px 0 0;
+}
+
+/* Floating UI copy */
+.floating-card small{
+  margin-top:1px;
+}
+
+/* Mobile: slightly tighter vertical rhythm */
+@media (max-width:650px){
+  .hero-lead{
+    margin-top:18px;
+  }
+  .project-intro{
+    margin-top:14px;
+  }
+  .project-card h3 + p{
+    margin-top:12px;
+  }
+  .project-card .tags{
+    margin:18px 0 14px;
+  }
+  .contact-card p{
+    margin-top:14px;
+  }
+  .about-copy p + p{
+    margin-top:16px;
+  }
+}
