@@ -1542,3 +1542,117 @@ p{margin:0}
     margin-bottom:36px;
   }
 }
+
+
+/* ===== Revnivo interactive 3D card ===== */
+#featuredRevnivo{
+  position:relative;
+  overflow:visible;
+  transform-style:preserve-3d;
+  perspective:1200px;
+  will-change:transform;
+  transition:
+    transform .28s var(--motion-ease),
+    box-shadow .28s var(--motion-ease),
+    border-color .28s ease;
+}
+#featuredRevnivo:hover{
+  transform:none;
+  box-shadow:0 30px 80px rgba(0,0,0,.34);
+  border-color:rgba(255,255,255,.12);
+}
+#featuredRevnivo .featured-status{
+  position:absolute;
+  top:34px;
+  right:34px;
+  z-index:8;
+  transform:translateZ(48px);
+}
+#featuredRevnivo .project-copy{
+  transform:translateZ(22px);
+  transform-style:preserve-3d;
+}
+#featuredRevnivo .revnivo-screenshot{
+  transform:
+    translate3d(0,var(--media-y),34px)
+    rotate(var(--media-rotate))
+    scale(var(--media-scale));
+  transform-style:preserve-3d;
+}
+#featuredRevnivo::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  z-index:6;
+  opacity:0;
+  background:
+    radial-gradient(
+      circle at var(--tilt-x,50%) var(--tilt-y,50%),
+      rgba(255,255,255,.10),
+      rgba(255,255,255,.035) 18%,
+      transparent 46%
+    );
+  transition:opacity .22s ease;
+}
+#featuredRevnivo.is-tilting::before{opacity:1}
+#featuredRevnivo.is-tilting .featured-status{
+  transform:translateZ(58px) scale(1.02);
+}
+#featuredRevnivo.is-tilting .project-copy{
+  transform:translateZ(30px);
+}
+#featuredRevnivo.is-tilting .revnivo-screenshot{
+  transform:
+    translate3d(0,var(--media-y),48px)
+    rotate(var(--media-rotate))
+    scale(var(--media-scale));
+}
+html[data-theme="light"] #featuredRevnivo:hover{
+  border-color:rgba(24,26,28,.14);
+  box-shadow:0 30px 70px rgba(34,37,40,.14);
+}
+html[data-theme="light"] #featuredRevnivo::before{
+  background:
+    radial-gradient(
+      circle at var(--tilt-x,50%) var(--tilt-y,50%),
+      rgba(20,22,24,.07),
+      rgba(20,22,24,.025) 18%,
+      transparent 46%
+    );
+}
+@media (max-width:980px){
+  #featuredRevnivo{
+    overflow:hidden;
+    transform:none!important;
+  }
+  #featuredRevnivo .featured-status{
+    top:22px;
+    right:22px;
+    transform:none;
+  }
+  #featuredRevnivo .project-copy{
+    transform:none;
+  }
+  #featuredRevnivo .revnivo-screenshot{
+    transform:translate3d(0,var(--media-y),0) rotate(var(--media-rotate)) scale(var(--media-scale));
+  }
+  #featuredRevnivo::before{display:none}
+}
+@media (max-width:650px){
+  #featuredRevnivo .featured-status{
+    top:18px;
+    right:18px;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  #featuredRevnivo,
+  #featuredRevnivo .featured-status,
+  #featuredRevnivo .project-copy,
+  #featuredRevnivo .revnivo-screenshot{
+    transform:none!important;
+    transition:none!important;
+  }
+  #featuredRevnivo::before{display:none!important}
+}
